@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 @Injectable({ providedIn: 'root' })
 export class DeviceService {
   private baseUrl =
-    'http://ec2-52-201-224-87.compute-1.amazonaws.com/api/devices';
+    'https://ec2-54-162-90-177.compute-1.amazonaws.com/api/devices';
 
   constructor(private http: HttpClient) {}
 

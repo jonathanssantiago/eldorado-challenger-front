@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 @Injectable({ providedIn: 'root' })
 export class CategoryService {
   private baseUrl =
-    'http://ec2-52-201-224-87.compute-1.amazonaws.com/api/categories';
+    'https://ec2-54-162-90-177.compute-1.amazonaws.com/api/categories';
 
   constructor(private http: HttpClient) {}
 
