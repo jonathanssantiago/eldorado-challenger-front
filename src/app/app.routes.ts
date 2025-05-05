@@ -15,5 +15,5 @@ export const appRoutes: Routes = [
         (m) => m.CategoryListComponent
       ),
   },
-  { path: '', redirectTo: '/devices', pathMatch: 'full' },
+  { path: '', redirectTo: '/categories', pathMatch: 'full' },
 ];
