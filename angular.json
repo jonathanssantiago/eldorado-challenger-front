@@ -20,9 +20,7 @@
             "outputPath": "dist/eldorado-challenger-frontend",
             "index": "src/index.html",
             "browser": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -62,6 +60,11 @@
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true
+            },
+            "csr": {
+              "outputPath": "dist/eldorado-csr",
+              "index": "src/index.html",
+              "outputHashing": "all"
             }
           },
           "defaultConfiguration": "production"
@@ -84,10 +87,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [

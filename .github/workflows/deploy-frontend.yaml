@@ -22,7 +22,7 @@ jobs:
         run: npm ci
 
       - name: Build Angular App
-        run: npm run build -- --configuration=production
+        run: npm run build -- --configuration=csr
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
@@ -33,10 +33,4 @@ jobs:
 
       - name: Deploy to S3
         run: |
-          aws s3 sync ./dist/eldorado-challenger-frontend/browser s3://${{ secrets.S3_BUCKET_NAME }} --delete \
-            --cache-control "max-age=31536000,public" \
-            --exclude "index.html"
-
-          aws s3 cp ./dist/eldorado-challenger-frontend/browser/index.html s3://${{ secrets.S3_BUCKET_NAME }}/index.html \
-            --cache-control "no-cache, no-store, must-revalidate" \
-            --content-type "text/html"
+          aws s3 sync ./dist/eldorado-csr s3://${{ secrets.S3_BUCKET_NAME }} --delete
