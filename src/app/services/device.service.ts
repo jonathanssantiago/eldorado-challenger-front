@@ -1,0 +1,21 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+
+@Injectable({ providedIn: 'root' })
+export class DeviceService {
+  private baseUrl = 'http://localhost:3000/api/devices';
+
+  constructor(private http: HttpClient) {}
+
+  getAll() {
+    return this.http.get(this.baseUrl);
+  }
+
+  create(data: any) {
+    return this.http.post(this.baseUrl, data);
+  }
+
+  delete(id: number) {
+    return this.http.delete(`${this.baseUrl}/${id}`);
+  }
+}
