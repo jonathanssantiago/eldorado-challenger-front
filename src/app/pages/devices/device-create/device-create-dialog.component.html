@@ -1,0 +1,54 @@
+<h2 mat-dialog-title>Create Device</h2>
+
+<mat-dialog-content>
+    <form [formGroup]="deviceForm">
+        <!-- Category Field -->
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Category</mat-label>
+            <mat-select formControlName="categoryId" required>
+                <mat-option value="">Select a category</mat-option>
+                <mat-option *ngFor="let category of categories" [value]="category.id">
+                    {{category.name}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="deviceForm.get('categoryId')?.hasError('required')">
+                Category is required
+            </mat-error>
+        </mat-form-field>
+
+        <!-- Color Field -->
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Color</mat-label>
+            <input matInput formControlName="color" required>
+            <mat-error *ngIf="deviceForm.get('color')?.hasError('required')">
+                Color is required
+            </mat-error>
+            <mat-error *ngIf="deviceForm.get('color')?.hasError('maxlength')">
+                Color cannot exceed 16 characters
+            </mat-error>
+            <mat-error *ngIf="deviceForm.get('color')?.hasError('pattern')">
+                Color must contain only letters
+            </mat-error>
+        </mat-form-field>
+
+        <!-- Part Number Field -->
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Part Number</mat-label>
+            <input matInput type="number" formControlName="partNumber" required>
+            <mat-error *ngIf="deviceForm.get('partNumber')?.hasError('required')">
+                Part number is required
+            </mat-error>
+            <mat-error *ngIf="deviceForm.get('partNumber')?.hasError('min')">
+                Part number must be greater than 0
+            </mat-error>
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="deviceForm.invalid || loading">
+        <mat-icon>add</mat-icon>
+        Create
+    </button>
+</mat-dialog-actions>

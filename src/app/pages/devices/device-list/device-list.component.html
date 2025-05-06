@@ -1,28 +1,50 @@
-<div class="container">
-    <h2>Dispositivos</h2>
-    <button mat-raised-button color="primary" routerLink="/devices/new">Novo Dispositivo</button>
+<div class="device-list-container">
+    <div class="header-actions">
+        <h1 class="page-title">Device Management</h1>
+        <button mat-raised-button color="primary" (click)="openCreateDialog()">
+            <mat-icon>add</mat-icon>
+            New Device
+        </button>
+    </div>
 
-    <table mat-table [dataSource]="devices" class="mat-elevation-z8" style="width: 100%; margin-top: 20px;">
-        <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef>Nome</th>
-            <td mat-cell *matCellDef="let d">{{ d.name }}</td>
-        </ng-container>
+    <mat-card>
+        <mat-card-content>
+            <div *ngIf="loading" class="loading-container">
+                <mat-spinner diameter="40"></mat-spinner>
+            </div>
 
-        <ng-container matColumnDef="category">
-            <th mat-header-cell *matHeaderCellDef>Categoria</th>
-            <td mat-cell *matCellDef="let d">{{ d.category?.name || '-' }}</td>
-        </ng-container>
+            <table mat-table [dataSource]="devices" *ngIf="!loading">
+                <ng-container matColumnDef="category">
+                    <th mat-header-cell *matHeaderCellDef>Category</th>
+                    <td mat-cell *matCellDef="let device">{{ device.category.name }}</td>
+                </ng-container>
 
-        <ng-container matColumnDef="actions">
-            <th mat-header-cell *matHeaderCellDef>Ações</th>
-            <td mat-cell *matCellDef="let d">
-                <button mat-icon-button color="warn" (click)="delete(d.id)">
-                    <mat-icon>delete</mat-icon>
-                </button>
-            </td>
-        </ng-container>
+                <ng-container matColumnDef="color">
+                    <th mat-header-cell *matHeaderCellDef>Color</th>
+                    <td mat-cell *matCellDef="let device">{{ device.color }}</td>
+                </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="['name', 'category', 'actions']"></tr>
-        <tr mat-row *matRowDef="let row; columns: ['name', 'category', 'actions']"></tr>
-    </table>
+                <ng-container matColumnDef="partNumber">
+                    <th mat-header-cell *matHeaderCellDef>Part Number</th>
+                    <td mat-cell *matCellDef="let device">{{ device.partNumber }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef>Actions</th>
+                    <td mat-cell *matCellDef="let device">
+                        <button mat-icon-button color="warn" (click)="deleteDevice(device.id)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+            <div *ngIf="!loading && devices.length === 0" class="empty-state">
+                <p>No devices found. Create a new device to get started.</p>
+            </div>
+        </mat-card-content>
+    </mat-card>
 </div>

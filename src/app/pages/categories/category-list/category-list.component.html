@@ -1,10 +1,11 @@
 <div class="container">
-    <h2>Category Management</h2>
-
-    <button mat-raised-button color="accent" (click)="openCreateDialog()">
-        <mat-icon>add</mat-icon>
-        New Category
-    </button>
+    <div class="header-actions">
+        <h1 class="page-title">Category Management</h1>
+        <button mat-raised-button color="primary" (click)="openCreateDialog()">
+            <mat-icon>add</mat-icon>
+            New Category
+        </button>
+    </div>
 
     <table mat-table [dataSource]="categories" class="mat-elevation-z8" style="width: 100%; margin-top: 20px;">
         <ng-container matColumnDef="name">
