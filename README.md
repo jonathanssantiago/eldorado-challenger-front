@@ -1,4 +1,4 @@
-# Eldorado Challenger Frontend
+# Eldorado Challenge Frontend
 
 LINK CLOUDFRONT: https://d2avdre68u3inw.cloudfront.net
 
