@@ -16,10 +16,10 @@ export class DeviceListComponent implements OnInit {
   constructor(private service: DeviceService) {}
 
   ngOnInit() {
-    this.service.getAll().subscribe((data: any) => (this.devices = data));
+    this.service.getDevices().subscribe((data: any) => (this.devices = data));
   }
 
   delete(id: number) {
-    this.service.delete(id).subscribe(() => this.ngOnInit());
+    this.service.deleteDevice(id).subscribe(() => this.ngOnInit());
   }
 }

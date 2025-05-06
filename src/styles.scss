@@ -1,4 +1,121 @@
-/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+@include mat.core();
+
+$primary-color: #ff9d1c;
+$primary-light: lighten($primary-color, 15%);
+$primary-dark: darken($primary-color, 15%);
+$accent-color: #3f51b5;
+$warn-color: #f44336;
+$text-color: #333333;
+$light-text-color: #ffffff;
+$background-color: #f5f5f5;
+$card-background: #ffffff;
+$border-color: #e0e0e0;
+
+/* Global Styles */
+html,
+body {
+    height: 100%;
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    background-color: $background-color;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.page-title {
+    color: $primary-color;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.mat-card {
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.form-card {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.button-row {
+    display: flex;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+// Animation for list items
+.list-item-animation {
+    transition: all 0.3s ease;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+}
+
+// Custom styles for Angular Material components
+.mat-mdc-form-field {
+    margin-bottom: 16px;
+}
+
+.mat-toolbar.mat-primary {
+    background-color: $primary-color;
+    color: $light-text-color;
+}
+
+.mat-mdc-raised-button.mat-primary {
+    background-color: $primary-color;
+}
+
+.mat-mdc-table {
+    background-color: $card-background;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+// Custom scrollbar
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: $primary-light;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: $primary-color;
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    .button-row {
+        flex-direction: column;
+    }
+}

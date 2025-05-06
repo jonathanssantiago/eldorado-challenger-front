@@ -35,14 +35,14 @@ export class CategoryListComponent implements OnInit {
 
   loadCategories() {
     this.categoryService
-      .getAll()
+      .getCategories()
       .subscribe((data: any) => (this.categories = data));
   }
 
   createCategory() {
     if (!this.newCategoryName) return;
     this.categoryService
-      .create({ name: this.newCategoryName })
+      .createCategory({ name: this.newCategoryName })
       .subscribe(() => {
         this.newCategoryName = '';
         this.loadCategories();
@@ -50,6 +50,8 @@ export class CategoryListComponent implements OnInit {
   }
 
   deleteCategory(id: number) {
-    this.categoryService.delete(id).subscribe(() => this.loadCategories());
+    this.categoryService
+      .deleteCategory(id)
+      .subscribe(() => this.loadCategories());
   }
 }
