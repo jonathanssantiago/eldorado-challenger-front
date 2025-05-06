@@ -1,7 +1,6 @@
 @use '@angular/material' as mat;
 
 @include mat.core();
-
 $primary-color: #ff9d1c;
 $primary-light: lighten($primary-color, 15%);
 $primary-dark: darken($primary-color, 15%);
@@ -88,6 +87,27 @@ body {
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     overflow: hidden;
+}
+
+/* custom Snackbar  */
+.success-snackbar {
+    background-color: #4CAF50 !important;
+    /* Verde */
+    color: white !important;
+
+    .mat-simple-snackbar-action {
+        color: #E8F5E9 !important;
+    }
+}
+
+.error-snackbar {
+    background-color: #f44336 !important;
+    /* Vermelho */
+    color: white !important;
+
+    .mat-simple-snackbar-action {
+        color: #FFEBEE !important;
+    }
 }
 
 // Custom scrollbar

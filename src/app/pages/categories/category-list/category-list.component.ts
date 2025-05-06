@@ -7,6 +7,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { CategoryCreateDialogComponent } from '../category-create/category-create-dialog.component';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-category-list',
@@ -20,6 +23,7 @@ import { MatInputModule } from '@angular/material/input';
     MatTableModule,
     MatButtonModule,
     MatIconModule,
+    MatDialogModule,
   ],
   templateUrl: './category-list.component.html',
 })
@@ -27,7 +31,11 @@ export class CategoryListComponent implements OnInit {
   categories: any[] = [];
   newCategoryName = '';
 
-  constructor(private categoryService: CategoryService) {}
+  constructor(
+    private categoryService: CategoryService,
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit() {
     this.loadCategories();
@@ -50,8 +58,33 @@ export class CategoryListComponent implements OnInit {
   }
 
   deleteCategory(id: number) {
-    this.categoryService
-      .deleteCategory(id)
-      .subscribe(() => this.loadCategories());
+    this.categoryService.deleteCategory(id).subscribe({
+      next: () => {
+        this.categories = this.categories.filter((cat) => cat.id !== id);
+        this.snackBar.open('Category deleted successfully!', 'Close', {
+          duration: 3000,
+          panelClass: ['success-snackbar'],
+        });
+      },
+      error: (err) => {
+        console.error('Error deleting category', err);
+        this.snackBar.open('Error deleting category!', 'Close', {
+          duration: 5000,
+          panelClass: ['error-snackbar'],
+        });
+      },
+    });
+  }
+
+  openCreateDialog(): void {
+    const dialogRef = this.dialog.open(CategoryCreateDialogComponent, {
+      width: '400px',
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === 'created') {
+        this.loadCategories();
+      }
+    });
   }
 }
